@@ -1,0 +1,45 @@
+<project name="assignment1" basedir="." default="main">
+	
+    <property name="src.dir"     	value="src"/>
+	<property name="test.dir"    	value="test"/>
+    <property name="build.dir"   	value="build"/>
+	<property name="reports.dir"   	value="reports"/>
+	<property name="lib.dir" 		value="lib"/>
+    <property name="classes.dir" 	value="${build.dir}/classes"/>
+
+	<!-- Download the latest junit.jar from http://junit.org/ and put into lib folder! Current version is 4.11 -->
+	<property name="junit.jar"     	value="${lib.dir}/junit-4.11.jar"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+		<delete dir="${reports.dir}"/>
+    </target>
+
+	<target name="prepare">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${reports.dir}"/>
+	</target>
+
+    <target name="compile" depends="clean,prepare">
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"/>
+	</target>
+
+	<target name="test" depends="compile">
+		<junit printsummary="yes" haltonfailure="no">
+			<formatter type="plain"/>
+			<formatter type="xml"/>
+			<classpath path="${lib.dir}">
+				<pathelement location="${junit.jar}"/>
+			</classpath>
+			<batchtest fork="yes" todir="${reports.dir}">
+				<fileset dir="${test.dir}">
+					<include name="*/*Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="main" depends="test"/>
+
+</project>

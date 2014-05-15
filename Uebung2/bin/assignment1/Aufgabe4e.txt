@@ -1,0 +1,4 @@
+Aufgabe 4e
+Die Komplexitätskalssen unterscheiden sich. Während die iterative Funktion linear ist, ist die rekursive Funktion exponentiell(Baumstruktur).
+Die Laufzeit des Tests der iterativen Funktion wird nicht genau angezeigt(0,000s) und befindet sich somit im Bereich < 1ms.
+Hingegen benötigt der Test der rekursiven Funktion über 11 s.
